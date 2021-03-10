@@ -21,7 +21,7 @@ class BaseVPCStack(core.Stack):
         # This resource alone will create a private/public subnet in each AZ as well as nat/internet gateway(s)
         self.vpc = aws_ec2.Vpc(
             self, "BaseVPC",
-            cidr='10.0.0.0/24',
+            cidr='10.0.0.0/16',
             
         )
         

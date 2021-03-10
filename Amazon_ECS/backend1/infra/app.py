@@ -19,6 +19,7 @@ class BasePlatform(core.Construct):
     def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
         self.environment_name = 'ecsworkshop'
+        self.backend_desired_count = 1
 
         # The base platform stack is where the VPC was created, so all we need is the name to do a lookup and import it into this stack for use
         self.vpc = aws_ec2.Vpc.from_lookup(
@@ -85,7 +86,7 @@ class NodejsService(core.Stack):
             task_definition=self.fargate_task_def,
             cluster=self.base_platform.ecs_cluster,
             security_group=self.base_platform.services_sec_grp,
-            desired_count=1,
+            desired_count=self.backend_desired_count,
             cloud_map_options=aws_ecs.CloudMapOptions(
                 cloud_map_namespace=self.base_platform.sd_namespace,
                 name='ecsdemo-nodejs'

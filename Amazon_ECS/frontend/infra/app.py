@@ -19,6 +19,7 @@ class BasePlatform(core.Construct):
     def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
         self.environment_name = 'ecsworkshop'
+        self.frontend_desired_count = 1
 
         # The base platform stack is where the VPC was created, so all we need is the name to do a lookup and import it into this stack for use
         self.vpc = aws_ec2.Vpc.from_lookup(
@@ -70,7 +71,7 @@ class FrontendService(core.Stack):
             cluster=self.base_platform.ecs_cluster,
             cpu=256,
             memory_limit_mib=512,
-            desired_count=1,
+            desired_count=self.frontend_desired_count,
             public_load_balancer=True,
             cloud_map_options=self.base_platform.sd_namespace,
             task_image_options=self.fargate_task_image
