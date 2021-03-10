@@ -86,7 +86,7 @@ class CrystalService(core.Stack):
             task_definition=self.fargate_task_def,
             cluster=self.base_platform.ecs_cluster,
             security_group=self.base_platform.services_sec_grp,
-            desired_count=self.backend_desired_count,
+            desired_count=self.base_platform.backend_desired_count,
             cloud_map_options=aws_ecs.CloudMapOptions(
                 cloud_map_namespace=self.base_platform.sd_namespace,
                 name='ecsdemo-crystal'
