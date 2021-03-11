@@ -22,7 +22,9 @@ class BaseVPCStack(core.Stack):
         self.vpc = aws_ec2.Vpc(
             self, "BaseVPC",
             cidr='10.0.0.0/16',
-            
+            nat_gateways=0,
+            nat_gateway_subnets=None,
+            subnet_configuration=[ aws_ec2.SubnetConfiguration(cidr_mask=24, name="ecsworkshop/public", subnet_type=aws_ec2.SubnetType.PUBLIC )]
         )
         
         # Creating ECS Cluster in the VPC created above
@@ -33,9 +35,9 @@ class BaseVPCStack(core.Stack):
         )
 
         # Adding service discovery namespace to cluster
-        self.ecs_cluster.add_default_cloud_map_namespace(
-            name="service",
-        )
+        # self.ecs_cluster.add_default_cloud_map_namespace(
+        #     name="service",
+        # )
         
         ###### CAPACITY PROVIDERS SECTION #####
         # Adding EC2 capacity to the ECS Cluster

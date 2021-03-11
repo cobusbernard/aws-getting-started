@@ -73,7 +73,8 @@ class FrontendService(core.Stack):
             memory_limit_mib=512,
             desired_count=self.base_platoform.frontend_desired_count,
             public_load_balancer=True,
-            cloud_map_options=self.base_platform.sd_namespace,
+            assign_public_ip=True,
+            # cloud_map_options=self.base_platform.sd_namespace,
             task_image_options=self.fargate_task_image
         )
         
