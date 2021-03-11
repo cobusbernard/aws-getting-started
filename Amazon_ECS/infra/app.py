@@ -142,11 +142,11 @@ class BaseVPCStack(core.Stack):
         ##### END EC2 SPOT CAPACITY PROVIDER SECTION #####
         
         # Namespace details as CFN output
-        self.namespace_outputs = {
-            'ARN': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_arn,
-            'NAME': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_name,
-            'ID': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_id,
-        }
+        # self.namespace_outputs = {
+        #     'ARN': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_arn,
+        #     'NAME': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_name,
+        #     'ID': self.ecs_cluster.default_cloud_map_namespace.private_dns_namespace_id,
+        # }
         
         # Cluster Attributes
         self.cluster_outputs = {
@@ -207,9 +207,9 @@ class BaseVPCStack(core.Stack):
         #         )
      
         # All Outputs required for other stacks to build
-        core.CfnOutput(self, "NSArn", value=self.namespace_outputs['ARN'], export_name="NSARN")
-        core.CfnOutput(self, "NSName", value=self.namespace_outputs['NAME'], export_name="NSNAME")
-        core.CfnOutput(self, "NSId", value=self.namespace_outputs['ID'], export_name="NSID")
+        # core.CfnOutput(self, "NSArn", value=self.namespace_outputs['ARN'], export_name="NSARN")
+        # core.CfnOutput(self, "NSName", value=self.namespace_outputs['NAME'], export_name="NSNAME")
+        # core.CfnOutput(self, "NSId", value=self.namespace_outputs['ID'], export_name="NSID")
         core.CfnOutput(self, "FE2BESecGrp", value=self.services_3000_sec_group.security_group_id, export_name="SecGrpId")
         core.CfnOutput(self, "ECSClusterName", value=self.cluster_outputs['NAME'], export_name="ECSClusterName")
         core.CfnOutput(self, "ECSClusterSecGrp", value=self.cluster_outputs['SECGRPS'], export_name="ECSSecGrpList")
